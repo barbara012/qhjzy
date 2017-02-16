@@ -1,0 +1,1 @@
+!function(){var t=$(".job-list__item"),e=$(".simditor-body"),i=$(".job__title");t.click(function(o){o.preventDefault();var s=$(this).attr("href");t.removeClass("selected"),$(this).addClass("selected"),$.get(s,function(t){t.state&&(i.text(t.job.title),e.html(t.job.content))})})}();

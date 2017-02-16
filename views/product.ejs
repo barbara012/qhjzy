@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="/simditor/styles/simditor.css"/>
+		<% include head %>
+	</head>
+	<body>
+		<div class="product-single-page">
+			<div class="page-nav">
+				<div class="nav-content common-w clearfix">
+					<a href="/" class="logo-container float-l"></a>
+					<ul class="nav__menu float-r clearfix">
+						<li class="nav__menu_item float-l"><a href="/" class="menu__item_txt">首页</a></li>
+						<li class="nav__menu_item float-l"><a href="/about_us" class="menu__item_txt">企业介绍</a></li>
+						<li class="nav__menu_item float-l"><a href="/new_center" class="menu__item_txt">动态要闻</a></li>
+						<li class="nav__menu_item float-l"><a href="/product_show" class="menu__item_txt active">产品介绍</a></li>
+						<li class="nav__menu_item float-l"><a href="/partner_show" class="menu__item_txt">合作伙伴</a></li>
+						<li class="nav__menu_item float-l"><a href="/links" class="menu__item_txt">行业链接</a></li>
+						<li class="nav__menu_item float-l"><a href="/recruit" class="menu__item_txt">加入我们</a></li>
+						<li class="nav__menu_item float-l"><a href="/contact_us" class="menu__item_txt">联系我们</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="banner"></div>
+			<div class="bread_crumb">
+				<a href="/new_center">产品介绍</a>
+				<span class="divider">&gt;</span>
+				<span>产品详情</span>
+			</div>
+			<div class="new-sp__content common-w">
+				<h1 class="title"><%= product.title %></h1>
+				<div class="new__date txt-c"><%- product.time.day %></div>
+				<div class="new__detail">
+					<p class="picture__desc">产品图片</p>
+					<div class="product__picture">
+						<img src="<%= product.product %>"alt="<%= product.title %> - 青海聚之源新材料有限公司">
+					</div>
+					<div class="simditor">
+						<div class="simditor-body">
+							<%- product.desc %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% include footer %>
+		</div>
+		<script type="text/javascript">
+
+		</script>
+	</body>
+</html>

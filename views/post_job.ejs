@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="/simditor/styles/simditor.css"/>
+		<% include head %>
+	</head>
+	<body>
+		<div class="post-new backend">
+			<div class="page-nav">
+				<div class="nav-content common-w clearfix">
+					<a href="/" class="logo-container float-l"></a>
+					<ul class="nav__menu float-r clearfix">
+						<li class="nav__menu_item float-l"><a href="/" class="menu__item_txt">首页</a></li>
+						<li class="nav__menu_item float-l"><a href="/about_us" class="menu__item_txt">企业介绍</a></li>
+						<li class="nav__menu_item float-l"><a href="/new_center" class="menu__item_txt">动态要闻</a></li>
+						<li class="nav__menu_item float-l"><a href="/product_show" class="menu__item_txt">产品介绍</a></li>
+						<li class="nav__menu_item float-l"><a href="/partner_show" class="menu__item_txt">合作伙伴</a></li>
+						<li class="nav__menu_item float-l"><a href="/links" class="menu__item_txt">行业链接</a></li>
+						<li class="nav__menu_item float-l"><a href="/recruit" class="menu__item_txt">加入我们</a></li>
+						<li class="nav__menu_item float-l"><a href="/contact_us" class="menu__item_txt">联系我们</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="viewport viewport_post-job">
+				<div class="viewport__content">
+					<% if (editType == 'new') {%>
+					<form action="/post_job" method="post">
+						<div class="form__item clearfix">
+							<label for="post__title" class="form__item__label">招聘职位</label>
+							<div class="text-wrapper">
+								<input type="text" required="required" name="title" class="form__item__text" id="title">
+							</div>
+						</div>
+						<div class="form__item clearfix">
+							<label for="post__content" class="form__item__label">招聘内容</label>
+							<div class="text-wrapper">
+								<textarea name="content" required="required" id="post__content"></textarea>
+							</div>
+						</div>
+						<div class="form__item txt-c">
+							<button type="submit" class="submit-btn">确认发布</button>
+						</div>
+						<input type="hidden" id="hidden">
+					</form>
+					<% } else { %>
+					<form action="/edit/job/<%= job._id %>" method="post">
+						<div class="form__item clearfix">
+							<label for="post__title" class="form__item__label">招聘职位</label>
+							<div class="text-wrapper">
+								<input type="text" required="required" value="<%= job.title %>" name="title" class="form__item__text" id="title">
+							</div>
+						</div>
+						<div class="form__item clearfix">
+							<label for="post__content" class="form__item__label">招聘内容</label>
+							<div class="text-wrapper">
+								<textarea name="content" required="required" id="post__content"><%= job.content %></textarea>
+							</div>
+						</div>
+						<div class="form__item txt-c">
+							<button type="submit" class="submit-btn">确认发布</button>
+						</div>
+						<input type="hidden" id="hidden">
+					</form>
+					<% } %>
+				</div>
+			</div>
+			<% include footer %>
+			<script type="text/javascript" src="/simditor/scripts/module.js"></script>
+			<script type="text/javascript" src="/simditor/scripts/hotkeys.js"></script>
+			<script type="text/javascript" src="/simditor/scripts/uploader.js"></script>
+			<script type="text/javascript" src="/simditor/scripts/simditor.js"></script>
+			<script>
+				var editor = new Simditor({
+					textarea: $('#post__content'),
+					toolbar: [
+						'title',
+						'bold',
+						'italic',
+						'underline',
+						'fontScale',
+						'color',
+						'ol'  ,
+						'ul'   ,
+						'blockquote',
+						'table',
+						'link',
+						'image',
+						'hr'   ,
+						'indent',
+						'outdent',
+						'alignment'
+					]
+					//optional options
+				});
+			</script>
+		</div>
+	</body>
+</html>

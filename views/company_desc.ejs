@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include head %>
+</head>
+<body>
+<div class="company-desc">
+    <div class="page-nav">
+        <div class="nav-content common-w clearfix">
+            <a href="/" class="logo-container float-l"></a>
+            <ul class="nav__menu float-r clearfix">
+                <li class="nav__menu_item float-l"><a href="/" class="menu__item_txt">首页</a></li>
+                <li class="nav__menu_item float-l"><a href="/company_desc" class="menu__item_txt active">企业介绍</a></li>
+                <li class="nav__menu_item float-l"><a href="/product_show" class="menu__item_txt">产品中心</a></li>
+                <li class="nav__menu_item float-l"><a href="/base" class="menu__item_txt">生产基地</a></li>
+                <li class="nav__menu_item float-l"><a href="/new_center" class="menu__item_txt">动态要闻</a></li>
+                <li class="nav__menu_item float-l"><a href="/recruit" class="menu__item_txt">加入我们</a></li>
+                <li class="nav__menu_item float-l"><a href="/about_us" class="menu__item_txt">关于我们</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="common-banner"></div>
+    <div class="page-content">
+        <div class="common-w clearfix">
+            <div class="page_side">
+                <div class="side_tab_nav">
+                    <a href="javascript:;" class="tab_nav_item active">企业概况</a>
+                    <a href="javascript:;" class="tab_nav_item">企业管理</a>
+                    <a href="javascript:;" class="tab_nav_item">企业文化</a>
+                </div>
+                <div class="side_contact">
+                    <div class="contact_pic"></div>
+                    <p>滕州市国宁化工有限公司（国宁集团）</p>
+                    <p>公司联系人 刘经理</p>
+                    <p>手机：15266297989</p>
+                    <p>电话：0632-2722338/2722666</p>
+                    <p>传真：0632-2722338</p>
+                    <p>邮箱：gm@guoninggroup.cn</p>
+                    <p>高新部、销售部、销售一部（三氯硫磷）刘经理</p>
+                    <p>手机：15266297989</p>
+                    <p>电话：0632-2722338/2722666</p>
+                    <p>传真：0632-2722338</p>
+                    <p>邮箱：gm@guoninggroup.cn</p>
+                    <p>销售二部（亚磷酸）张经理</p>
+                    <p>手机：13561164937</p>
+                    <p>电话：0632-2722666</p>
+                    <p>传真：0632-2722666</p>
+                    <p>销售三部（2-氯丙酸）秦经理</p>
+                    <p>手机：13906116156</p>
+                    <p>销售四部（氯化亚砜）金经理</p>
+                    <p>手机：13856219672</p>
+                    <p>销售五部（酰氯系列）孙经理</p>
+                    <p>手机：13952075288</p>
+                    <p>地址：山东滕州市界河镇民营工业园1号</p>
+                </div>
+            </div>
+            <div class="page_main">
+                <div class="main_tab_contents">
+                    <div class="tab_content active">
+                        <div class="bread_crumb"><div class="inner">企业介绍 > 企业概况</div></div>
+                        <img class="content_banner" src="/img/company_desc/gk.png" alt="青海聚之源新材料有限公司"/>
+                        <p>青海聚之源新材料有限公司，位于海西州柴达木循环经济试验区德令哈工业园,公司成立于2016年，注册资金15000万元人民币。项目占地225亩，总投资约9.35亿元，将建成年产6000吨高端六氟磷酸锂项目和年产1万吨高性能锂电三元正极材料项目生产线。</p>
+                        <p>公司主要从事新型锂电材料的研发、生产、销售。目前，公司计划建设年产6000吨六氟磷酸锂项目及万吨级三元前驱体、高性能锂电三元正极材料。六氟磷酸锂是电池电解液最重要的组成部分。随着未来新能源领域的持续发展，六氟磷酸锂的市场需求也将持续增加。此外，锂电三元前驱体是烧结三元材料的原材料是镍钴锰的复合物，同时。锂电三元正极材料是锂离子电池中继钴酸锂之后被认为是最有应用前景的正极材料，也是决定动力型锂离子电池性能的关键材料之一。</p>
+                        <p>青海聚之源新材料有限公司作为海西州柴达木循环经济试验区所管辖范围内的重点项目之一，为响应青海省“千亿锂电战略”我公司还将根据锂电行业发展态势，择机投资其他锂电产品，打造万吨级锂电材料产业园，为青海省发展“千亿锂电战略”做出贡献。</p>
+                    </div>
+                    <div class="tab_content">
+                        <div class="bread_crumb"><div class="inner">企业介绍 > 企业管理</div></div>
+                        <img class="content_banner" src="/img/company_desc/gk.png" alt="青海聚之源新材料有限公司"/>
+
+                    </div>
+                    <div class="tab_content">
+                        <div class="bread_crumb"><div class="inner">企业介绍 > 企业文化</div></div>
+                        <img class="content_banner" src="/img/company_desc/gk.png" alt="青海聚之源新材料有限公司"/>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% include footer %>
+</div>
+<script>
+    $(document).ready(function() {
+       $('.tab_nav_item').click(function() {
+           var index = $(this).index();
+           $(this).addClass('active').siblings('a').removeClass('active');
+           $('.tab_content').removeClass('active').eq(index).addClass('active');
+       });
+    });
+</script>
+</body>
+</html>

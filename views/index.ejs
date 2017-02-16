@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include head %>
+	</head>
+	<body>
+		<div class="home-page">
+			<div class="page-nav">
+				<div class="nav-content common-w clearfix">
+					<a href="/" class="logo-container float-l"></a>
+					<ul class="nav__menu float-r clearfix">
+						<li class="nav__menu_item float-l"><a href="/" class="menu__item_txt active">首页</a></li>
+						<li class="nav__menu_item float-l"><a href="/company_desc" class="menu__item_txt">企业介绍</a></li>
+						<li class="nav__menu_item float-l"><a href="/product_show" class="menu__item_txt">产品中心</a></li>
+						<li class="nav__menu_item float-l"><a href="/base" class="menu__item_txt">生产基地</a></li>
+						<li class="nav__menu_item float-l"><a href="/new_center" class="menu__item_txt">动态要闻</a></li>
+						<li class="nav__menu_item float-l"><a href="/recruit" class="menu__item_txt">加入我们</a></li>
+						<li class="nav__menu_item float-l"><a href="/about_us" class="menu__item_txt">关于我们</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="home-banner-slider">
+				<div class="hd">
+					<ul></ul>
+				</div>
+				<div class="bd">
+					<ul class="pic-list">
+						<li>
+							<div class="slider__item slider__item1"></div>
+						</li>
+						<li>
+							<div class="slider__item slider__item2"></div>
+						</li>
+						<li>
+							<div class="slider__item slider__item3"></div>
+						</li>
+					</ul>
+				</div>				
+			</div>
+			<div class="home_content clearfix">
+				<div class="common-w">
+					<div class="content_product">
+						<div class="title">
+							<span class="title_span">产品分类</span>
+							<a href="#" class="title_more">MORE</a>
+						</div>
+						<div class="content_main">
+							<a href="#" class="product"></a>
+							<a href="#" class="product"></a>
+							<a href="#" class="product"></a>
+						</div>
+					</div>
+					<div class="content_company">
+						<div class="title">
+							<span class="title_span">公司简介</span>
+							<a href="#" class="title_more">MORE</a>
+						</div>
+						<div class="content_main">
+							<div class="company-item clearfix">
+								<div class="company_desc">
+									<p> 青海聚之源新材料有限公司，位于海西州柴达木循环经济试验区德令哈工业园,公司成立于2016年，注册资金15000万元人民币。项目占地225亩，总投资约9.35亿元，将建成年产6000吨高端六氟磷酸锂项目和年产1万吨高性能锂电三元正极材料项目生产线。</p>
+									<p>	公司主要从事新型锂电材料的研发、生产、销售。目前，公司计划建设年产6000吨六氟磷酸锂项目及万吨级三元前驱体、高性能锂电三元正极材料。六氟磷酸锂是电池电解液最重要的组成部分。随着未来新能源领域的持续发展，六氟磷酸锂的市场需求也将</p>
+								</div>
+								<div class="company_img"><img src="/img/index/base.png" alt="青海聚之源"></div>
+							</div>
+						</div>
+					</div>
+					<div class="content_news">
+						<div class="title">
+							<span class="title_span">新闻动态</span>
+							<a href="#" class="title_more">MORE</a>
+						</div>
+						<div class="content_main">
+							<div class="new-list">
+								<a href="#" class="new-item">开工仪式<span class="new_date">2016.09.01</span></a>
+								<a href="#" class="new-item">孟海州长阿英得副州长实地调研<span class="new_date">2016.09.01</span></a>
+								<a href="#" class="new-item">领导视察中电工业环境科技园项目<span class="new_date">2016.09.01</span></a>
+								<a href="#" class="new-item">中电环境一届四次董事会顺利召开<span class="new_date">2016.09.01</span></a>
+								<a href="#" class="new-item">公司召开上半年度经营管理会议<span class="new_date">2016.09.01</span></a>
+								<a href="#" class="new-item">公司举行团队熔炼活动<span class="new_date">2016.09.01</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% include footer %>
+		</div>
+		<script src="/js/superslider.js"></script>
+		<script>
+			$(function () {
+				jQuery(".home-banner-slider").slide({
+					titCell: ".hd ul",
+					mainCell: ".bd ul",
+					autoPage: true,
+					effect:"left",
+					autoPlay:true,
+					vis:1,
+					trigger:"click"
+				});
+
+				$('[data-link]').click(function() {
+					location.href = $(this).data('link');
+				});
+				//
+			});
+		</script>
+	</body>
+</html>

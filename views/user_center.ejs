@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include head %>
+	</head>
+	<body>
+		<div class="user-center backend">
+			<div class="page-nav">
+				<div class="nav-content common-w clearfix">
+					<a href="/" class="logo-container float-l"></a>
+					<ul class="nav__menu float-r clearfix">
+						<li class="nav__menu_item float-l"><a href="/" class="menu__item_txt">首页</a></li>
+						<li class="nav__menu_item float-l"><a href="/about_us" class="menu__item_txt">企业介绍</a></li>
+						<li class="nav__menu_item float-l"><a href="/new_center" class="menu__item_txt">动态要闻</a></li>
+						<li class="nav__menu_item float-l"><a href="/product_show" class="menu__item_txt">产品介绍</a></li>
+						<li class="nav__menu_item float-l"><a href="/partner_show" class="menu__item_txt">合作伙伴</a></li>
+						<li class="nav__menu_item float-l"><a href="/links" class="menu__item_txt">行业链接</a></li>
+						<li class="nav__menu_item float-l"><a href="/recruit" class="menu__item_txt">加入我们</a></li>
+						<li class="nav__menu_item float-l"><a href="/contact_us" class="menu__item_txt">联系我们</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="viewport viewport_user-center">
+				<div class="viewport__content">
+					<h1 class="title">您已登录，可以进入以下操作</h1>
+					<div class="options clearfix">
+						<a class="option__item" href="/manager_new" target="_blank">
+							<span class="icon icon-new"></span>
+							<h2>动态要闻管理</h2>
+						</a>
+						<a class="option__item" href="/manager_product" target="_blank">
+							<span class="icon icon-product"></span>
+							<h2>产品介绍管理</h2>
+						</a>
+						<a class="option__item" href="/manager_partner" target="_blank">
+							<span class="icon icon-partner"></span>
+							<h2>合作伙伴管理</h2>
+						</a>
+						<a class="option__item" href="/manager_link" target="_blank">
+							<span class="icon icon-link"></span>
+							<h2>行业链接管理</h2>
+						</a>
+						<a class="option__item" href="/manager_job" target="_blank">
+							<span class="icon icon-job"></span>
+							<h2>招聘信息管理</h2>
+						</a>
+					</div>
+					<div class="logout-container">
+						<a href="/logout" class="logout">退出</a>
+					</div>					
+				</div>
+			</div>
+			<% include footer %>
+		</div>
+	</body>
+</html>

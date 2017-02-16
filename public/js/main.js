@@ -1,0 +1,1 @@
+var Tab=$.extend({},{init:function(){var t=$(".tab__nav"),a=t.siblings(".tab__content");t.on("click",".tab__nav__item",function(){var n=$(this).index();t.children(".tab__nav__item").removeClass("active"),$(this).addClass("active"),a.children(".tab__content__cnt").removeClass("active").eq(n).addClass("active")})},enable:function(){this.init()}});

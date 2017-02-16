@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/simditor/styles/simditor.css"/>
+    <% include head %>
+</head>
+<body>
+<div class="post-new backend">
+    <div class="page-nav">
+        <div class="nav-content common-w clearfix">
+            <a href="/" class="logo-container float-l"></a>
+            <ul class="nav__menu float-r clearfix">
+                <li class="nav__menu_item float-l"><a href="/" class="menu__item_txt">首页</a></li>
+                <li class="nav__menu_item float-l"><a href="/about_us" class="menu__item_txt">企业介绍</a></li>
+                <li class="nav__menu_item float-l"><a href="/new_center" class="menu__item_txt">动态要闻</a></li>
+                <li class="nav__menu_item float-l"><a href="/product_show" class="menu__item_txt">产品介绍</a></li>
+                <li class="nav__menu_item float-l"><a href="/partner_show" class="menu__item_txt">合作伙伴</a></li>
+                <li class="nav__menu_item float-l"><a href="/links" class="menu__item_txt">行业链接</a></li>
+                <li class="nav__menu_item float-l"><a href="/recruit" class="menu__item_txt">加入我们</a></li>
+                <li class="nav__menu_item float-l"><a href="/contact_us" class="menu__item_txt">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="viewport viewport_post-product">
+        <div class="viewport__content">
+            <form action="/edit/product/<%= product._id %>" method="post" enctype='multipart/form-data'>
+                <div class="form__item clearfix">
+                    <label for="post__title" class="form__item__label">产品封面</label>
+                    <div class="text-wrapper">
+                        <div class="product__preview">
+                            <img src="<%= product.product %>" alt="<%= product.title %>">
+                        </div>
+                        <div class="file-wrapper">
+                            <input type="hidden" name="pic" id="defaultPic" value="<%= product.product %>">
+                            <input type="file" name="product" id="product-picture">
+                            <div class="tip">请选择你要你要发布到企业logo图片</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form__item clearfix">
+                    <label for="post__title" class="form__item__label">产品标题</label>
+                    <div class="text-wrapper">
+                        <input type="text" required="required" class="form__item__text" value="<%= product.title %>" name="title" id="post__title">
+                    </div>
+                </div>
+                <div class="form__item clearfix">
+                    <label for="post_content" class="form__item__label">产品描述</label>
+                    <div class="text-wrapper">
+                        <textarea type="text" name="desc" required="required" id="post__desc"><%= product.desc %></textarea>
+                    </div>
+                </div>
+                <div class="form__item txt-c">
+                    <button type="submit" required="required" class="submit-btn">确认发布</button>
+                </div>
+                <input type="hidden" id="hidden">
+            </form>
+        </div>
+    </div>
+    <% include footer %>
+    <script type="text/javascript" src="/simditor/scripts/module.js"></script>
+    <script type="text/javascript" src="/simditor/scripts/hotkeys.js"></script>
+    <script type="text/javascript" src="/simditor/scripts/uploader.js"></script>
+    <script type="text/javascript" src="/simditor/scripts/simditor.js"></script>
+    <script src="/js/postProduct.js"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include head %>
+	</head>
+	<body>
+		<div class="post-new backend">
+			<div class="page-nav">
+				<div class="nav-content common-w clearfix">
+					<a href="/" class="logo-container float-l"></a>
+					<ul class="nav__menu float-r clearfix">
+                        <li class="nav__menu_item float-l"><a href="/" class="menu__item_txt">首页</a></li>
+                        <li class="nav__menu_item float-l"><a href="/about_us" class="menu__item_txt">企业介绍</a></li>
+                        <li class="nav__menu_item float-l"><a href="/new_center" class="menu__item_txt">动态要闻</a></li>
+                        <li class="nav__menu_item float-l"><a href="/product_show" class="menu__item_txt">产品介绍</a></li>
+                        <li class="nav__menu_item float-l"><a href="/partner_show" class="menu__item_txt">合作伙伴</a></li>
+                        <li class="nav__menu_item float-l"><a href="/links" class="menu__item_txt">行业链接</a></li>
+                        <li class="nav__menu_item float-l"><a href="/recruit" class="menu__item_txt">加入我们</a></li>
+                        <li class="nav__menu_item float-l"><a href="/contact_us" class="menu__item_txt">联系我们</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="viewport viewport_post-link">
+				<div class="viewport__content">
+				<% if (editType == 'new') { %>
+					<form action="/post_link" method="post">
+						<div class="form__item clearfix">
+							<label for="post__title" class="form__item__label">链接标题</label>
+							<div class="text-wrapper">
+								<input type="text" class="form__item__text" required="required" name="title" id="post__title">
+							</div>
+						</div>
+						<div class="form__item clearfix">
+							<label for="post_content" class="form__item__label">链接地址</label>
+							<div class="text-wrapper">
+								<input type="text" placeholder="http://" class="form__item__text" required="required" name="url" id="post__url">
+							</div>
+						</div>
+						<div class="form__item txt-c">
+							<button type="submit" required="required" class="submit-btn">确认发布</button>
+						</div>
+					</form>
+				<% } else { %>
+					<form action="/edit/link/<%= link._id %>" method="post">
+						<div class="form__item clearfix">
+							<label for="post__title" class="form__item__label">链接标题</label>
+							<div class="text-wrapper">
+								<input type="text" class="form__item__text" value="<%= link.title %>" required="required" name="title" id="post__title">
+							</div>
+						</div>
+						<div class="form__item clearfix">
+							<label for="post_content" class="form__item__label">链接地址</label>
+							<div class="text-wrapper">
+								<input type="text" placeholder="http://"  value="<%= link.url %>" class="form__item__text" required="required" name="url" id="post__url">
+							</div>
+						</div>
+						<div class="form__item txt-c">
+							<button type="submit" required="required" class="submit-btn">确认发布</button>
+						</div>
+					</form>
+				<% } %>
+				</div>
+			</div>
+			<% include footer %>
+		</div>
+	</body>
+</html>
