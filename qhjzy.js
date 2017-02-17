@@ -28,7 +28,7 @@ var errorLog = fs.createWriteStream(__dirname + '/error.log', {flags: 'a'});
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(flash());
@@ -72,5 +72,5 @@ app.use(passport.initialize());
 routes(app);
 
 http.createServer(app).listen(app.get('port'), function(){
- 	console.log('人生苦短，及时行乐 ' + app.get('port'));
+ 	console.log('Express server listening on port ' + app.get('port'));
 });

@@ -93,9 +93,9 @@ code {
 	position: relative;
 	.logo-container {
 		font-size: 0;
-		width: 230px;
-		height: 77px;
-		background: url(/img/logo.jpg) no-repeat center;
+		width: 317px;
+		height: 71px;
+		background: url(/img/logo.png) no-repeat center;
 	}
 	.menu__item_txt {
 		line-height: 80px;
@@ -306,6 +306,14 @@ code {
 		float: right;
 		color: #a9a9a9;
 		text-decoration: none;
+		&:after {
+			content: '';
+			width: 9px;
+			height: 9px;
+			display: inline-block;
+			background: url("/img/triangle.png") no-repeat center;
+			margin-left: 5px;
+		}
 	}
 	.product {
 		display: block;
@@ -322,6 +330,29 @@ code {
 		&:nth-child(3) {
 			background-image: url("/img/index/3.png");
 		}
+		.icon{
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+			background: no-repeat center;
+			vertical-align: -4px;
+			margin-right: 5px;
+		}
+		.icon-earth {
+			background-image: url("/img/index/earth.png");
+		}
+		.icon-snow {
+			background-image: url("/img/index/snow.png");
+		}
+		.icon-leaf {
+			background-image: url("/img/index/leaf.png");
+		}
+	}
+	.product_title {
+		color: #fff;
+		font-size: 16px;
+		text-align: right;
+		padding: 35px 10px 0 0;
 	}
 	.company_desc {
 		width: 328px;
@@ -339,6 +370,16 @@ code {
 		color: #484848;
 		padding: 10px 0;
 		border-bottom: 1px dashed #eeeeee;
+		&:before {
+			content: '';
+			width: 5px;
+			height: 5px;
+			display: inline-block;
+			border-radius: 4px;
+			background: #41a7de;
+			vertical-align: 2px;
+			margin-right: 10px;
+		}
 	}
 	.new_date {
 		font-size: 12px;
@@ -539,10 +580,10 @@ code {
 		}
 	}
 	.logo {
-		width: 300px;
-		height: 77px;
+		width: 317px;
+		height: 55px;
 		display: block;
-		background: url(/img/logo.jpg) center no-repeat;
+		background: url(/img/logo.png) center no-repeat;
 	}
 }
 
