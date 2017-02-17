@@ -75,12 +75,10 @@
 							<div class="tab_content">
 								<div class="bread_crumb"><div class="inner">产品中心 > 高性能锂电三元正极材料</div></div>
 								<h1>高性能锂电三元正极材料</h1>
-								<div class="product_img"><img src="/img/product_show/1.png" alt="青海聚之源新材料有限公司"/></div>
 							</div>
 							<div class="tab_content">
 								<div class="bread_crumb"><div class="inner">产品中心 > 无水氟化氢</div></div>
 								<h1>无水氟化氢</h1>
-								<div class="product_img"><img src="/img/product_show/1.png" alt="青海聚之源新材料有限公司"/></div>
 
 							</div>
 						</div>
@@ -91,10 +89,18 @@
 		</div>
 		<script>
 			$(document).ready(function() {
-				$('.tab_nav_item').click(function() {
+				var $tabNavItem = $('.tab_nav_item');
+				var $tabContent = $('.tab_content');
+				var hsh = location.hash;
+				if (hsh) {
+					hsh = hsh.substr(1);
+					$tabNavItem.removeClass('active').eq(hsh).addClass('active');
+					$tabContent.removeClass('active').eq(hsh).addClass('active');
+				}
+				$tabNavItem.click(function() {
 					var index = $(this).index();
 					$(this).addClass('active').siblings('a').removeClass('active');
-					$('.tab_content').removeClass('active').eq(index).addClass('active');
+					$tabContent.removeClass('active').eq(index).addClass('active');
 				});
 			});
 		</script>
