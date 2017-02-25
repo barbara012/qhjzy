@@ -150,32 +150,12 @@ Post.getOne = function(id, callback) {
 				{
 					'_id': new ObjectID(id)
 				},
-				function (err, doc) {					
+				function (err, doc) {
+					mongodb.close();
 					if (err) {
-						mongodb.close();
 						return callback(err);
 					}
-					if (doc) {
-					//每访问 1 次，pv 值增加 1
-					collection.update(
-						{
-							'_id': new ObjectID(id)
-						},
-						{
-							$inc: {"pv": 1}
-						},
-						function (err) {
-							mongodb.close();
-							if (err) {
-								return callback(err);
-							}
-						}
-					);
-						
-			//解析 markdown 为 html
-			// 			doc.post = markdown.toHTML(doc.post);
-						callback(null, doc);//返回查询的一篇文章						
-					}
+					callback(null, doc);//返回查询的一篇文章
 				}
 			);
 		});

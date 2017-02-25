@@ -180,13 +180,13 @@ module.exports = function (app) {
 	//新闻1
 	app.get('/new/:id', function (req, res) {
 		PostNew.getOne(req.params.id, function (err, onenew) {
-			if (err) {
+			if (err || !onenew) {
 				req.flash('error', err);
 				console.log(err);
 				return res.redirect('/new_center');
-			};
+			}
 			res.render('new', {
-				title: onenew.title,
+				title: onenew.title + '-青海聚之源新材料有限公司',
 				onenew: onenew,
 				user: req.session.user,
 				success: req.flash('success').toString(),
@@ -203,7 +203,7 @@ module.exports = function (app) {
 					req.flash('error', err);
 					console.log(err);
 					return res.redirect('/manager_new');
-				};
+				}
 				res.render('edit_new', {
                     type: onenew.type,
 					title: onenew.title,
@@ -218,7 +218,7 @@ module.exports = function (app) {
 				req.flash('error', '没有权限');
 				console.log(err);
 				return res.redirect('/manager_new');
-			};
+			}
 		}
 
 	});
@@ -256,150 +256,31 @@ module.exports = function (app) {
 		});
 	});
 
-	//管理员后台产品中心
-	app.get('/manager_product', checkLogin);
-	app.get('/manager_product', function (req, res) {
-		//判断是否是第一页，并把请求的页数转换成 number 类型
-		var page = req.query.p ? parseInt(req.query.p) : 1;
-		//查询并返回第 page 页的 10 篇文章
-        PostProduct.getTen(page, function (err, products, total) {
-			if (err) {
-                products = [];
-			}
-			res.render('manager_product', {
-				title: '产品中心-青海聚之源新材料有限公司',
-				products: products,
-				page: page,
-				isFirstPage: (page - 1) == 0,
-				isLastPage: ((page - 1) * 10 + products.length) == total,
-				user: req.session.user,
-				success: req.flash('success').toString(),
-				error: req.flash('error').toString()
-			});
-		});
-	});
-    //发布产品
-    app.get('/post_product', checkLogin);
-    app.get('/post_product', function (req, res) {
-        res.render('post_product', {
-            title: '发布产品-青海聚之源新材料有限公司',
-            user: req.session.user,
-            success: req.flash('success').toString(),
-            error: req.flash('error').toString()
-        });
-    });
-    app.post('/post_product', checkLogin);
-    app.post('/post_product', function (req, res) {
-
-        console.log(req.body.title);
-        console.log(req.body.desc);
-        var product = req.files.product, dbImgUrl;
-        if (product.size == 0){
-            // 使用同步方式删除一个文件
-            fs.unlinkSync(product.path);
-            console.log('Successfully removed an empty file!');
-        } else {
-
-            var target_path = './public/images/dbimg/' + product.name;
-            // 使用同步方式重命名一个文件
-            fs.renameSync(product.path, target_path);
-
-            dbImgUrl = '/images/dbimg/' + product.name;
-        }
-        var postProduct = new PostProduct(req.body.title, req.body.desc, dbImgUrl);
-        postProduct.save(function (err) {
-            if (err) {
-                req.flash('error', '发布失败');
-                return res.redirect('/post_product');
-            }
-            req.flash('success', '发布成功!');
-            res.redirect('/manager_product');
-        });
-    });
-    //编辑产品
-    app.get('/edit/product/:id', checkLogin);
-    app.get('/edit/product/:id', function (req, res) {
-        PostProduct.edit(req.params.id, function (err, product) {
-            if (err) {
-                req.flash('error', err);
-                console.log(err);
-                return res.redirect('/manager_product');
-            }
-            res.render('edit_product', {
-                product: product,
-                title: '编辑-' + product.title,
-                user: req.session.user,
-                success: req.flash('success').toString(),
-                error: req.flash('error').toString()
-            });
-        });
-
-    });
-    app.post('/edit/product/:id', checkLogin);
-    app.post('/edit/product/:id', function (req, res) {
-        var product = req.files.product, dbImgUrl;
-        if (req.body.pic) {
-            dbImgUrl = req.body.pic;
-        } else {
-            if (product.size == 0){
-                // 使用同步方式删除一个文件
-                fs.unlinkSync(product.path);
-                console.log('Successfully removed an empty file!');
-            } else {
-
-                var target_path = './public/images/dbimg/' + product.name;
-                // 使用同步方式重命名一个文件
-                fs.renameSync(product.path, target_path);
-
-                dbImgUrl = '/images/dbimg/' + product.name;
-            }
-        }
-        PostProduct.update(
-            req.params.id,
-            req.body.title,
-            req.body.desc,
-            dbImgUrl,function (err) {
-                if (err) {
-                    console.log('err');
-                    req.flash('error', err);
-                    return res.redirect('/manager_product');
-                }
-                req.flash('success', '修改成功!');
-                return res.redirect('/manager_product');
-            });
-    });
-    //删除产品
-    app.get('/delete/product/:id', checkLogin);
-    app.get('/delete/product/:id', function(req, res) {
-        PostProduct.remove(req.params.id, function (err) {
-            if (err) {
-                req.flash('error', err);
-                return res.redirect('back');
-            }
-            req.flash('success', '删除成功!');
-            res.redirect('manager_product');
-        });
-    });
-
-    // //产品展示
+    //产品展示
 	app.get('/product_show', function (req, res) {
-        var page = req.query.p ? parseInt(req.query.p) : 1;
-        // 查询并返回第 page 页的 10 篇文章
-        PostProduct.getTen(page, function (err, products, total) {
-            if (err) {
-                products = [];
-            }
-            res.render('product_show', {
-                title: '产品展示-青海聚之源新材料有限公司',
-                products: products,
-                page: page,
-                isFirstPage: (page - 1) == 0,
-                isLastPage: ((page - 1) * 10 + products.length) == total,
-                user: req.session.user,
-                success: req.flash('success').toString(),
-                error: req.flash('error').toString()
-            });
-        });
+        //var page = req.query.p ? parseInt(req.query.p) : 1;
+        //// 查询并返回第 page 页的 10 篇文章
+        //PostProduct.getTen(page, function (err, products, total) {
+        //    if (err) {
+        //        products = [];
+        //    }
+        //    res.render('product_show', {
+        //        title: '产品展示-青海聚之源新材料有限公司',
+        //        products: products,
+        //        page: page,
+        //        isFirstPage: (page - 1) == 0,
+        //        isLastPage: ((page - 1) * 10 + products.length) == total,
+        //        user: req.session.user,
+        //        success: req.flash('success').toString(),
+        //        error: req.flash('error').toString()
+        //    });
+        //});
+		res.render('product_show', {
+			title: '产品展示-青海聚之源新材料有限公司',
+			user: req.session.user,
+			success: req.flash('success').toString(),
+			error: req.flash('error').toString()
+		});
 	});
 	//产品详情
 	app.get('/product/:id', function (req, res) {
@@ -416,258 +297,6 @@ module.exports = function (app) {
 				success: req.flash('success').toString(),
 				error: req.flash('error').toString()
 			});
-		});
-	});
-
-	//合作伙伴
-	app.get('/partner_show', function (req, res) {
-		var page = req.query.p ? parseInt(req.query.p) : 1;
-		// 查询并返回第 page 页的 10 个合作伙伴
-		PostPartner.getTen(page, function (err, partners, total) {
-			if (err) {
-				partners = [];
-			}
-			res.render('partner_show', {
-				title: '合作伙伴-青海聚之源新材料有限公司',
-				partners: partners,
-				page: page,
-				isFirstPage: (page - 1) == 0,
-				isLastPage: ((page - 1) * 10 + partners.length) == total,
-				user: req.session.user,
-				success: req.flash('success').toString(),
-				error: req.flash('error').toString()
-			});
-		});
-	});
-	//合作伙伴管理后台
-	app.get('/manager_partner', checkLogin);
-	app.get('/manager_partner', function (req, res) {
-		//判断是否是第一页，并把请求的页数转换成 number 类型
-		var page = req.query.p ? parseInt(req.query.p) : 1;
-		//查询并返回第 page 页的 10 篇文章
-		PostPartner.getTen(page, function (err, partners, total) {
-			if (err) {
-				products = [];
-			}
-			res.render('manager_partner', {
-				title: '管理合作伙伴-青海聚之源新材料有限公司',
-				partners: partners,
-				page: page,
-				isFirstPage: (page - 1) == 0,
-				isLastPage: ((page - 1) * 10 + partners.length) == total,
-				user: req.session.user,
-				success: req.flash('success').toString(),
-				error: req.flash('error').toString()
-			});
-		});
-	});
-	//上传合作伙伴
-	app.get('/post_partner', checkLogin);
-	app.get('/post_partner', function (req, res) {
-		res.render('post_partner', {
-			title: '上传合作伙伴-青海聚之源新材料有限公司',
-			editType: 'new',
-			user: req.session.user,
-			success: req.flash('success').toString(),
-			error: req.flash('error').toString()
-		});
-	});
-	app.post('/post_partner', checkLogin);
-	app.post('/post_partner', function (req, res) {
-		var partner = req.files.partner, dbImgUrl;
-		if (partner.size == 0){
-			// 使用同步方式删除一个文件
-			fs.unlinkSync(partner.path);
-			console.log('Successfully removed an empty file!');
-		} else {
-
-			var target_path = './public/images/dbimg/' + partner.name;
-			// 使用同步方式重命名一个文件
-			fs.renameSync(partner.path, target_path);
-
-			dbImgUrl = '/images/dbimg/' + partner.name;
-		}
-		var postPartner = new PostPartner(dbImgUrl);
-		postPartner.save(function (err) {
-			if (err) {
-				req.flash('error', '发布失败');
-				return res.redirect('/post_partner');
-			}
-			req.flash('success', '发布成功!');
-			res.redirect('/manager_partner');
-		});
-	});
-	//编辑合作 伙伴
-	app.get('/edit/partner/:id', checkLogin);
-	app.get('/edit/partner/:id', function (req, res) {
-		PostPartner.edit(req.params.id, function (err, partner) {
-			if (err) {
-				req.flash('error', err);
-				console.log(err);
-				return res.redirect('/manager_partner');
-			}
-			console.log(partner);
-			res.render('post_partner', {
-				partner: partner,
-				editType: 'edit',
-				title: '重新上传合作伙伴LOGO-青海聚之源新材料有限公司' ,
-				user: req.session.user,
-				success: req.flash('success').toString(),
-				error: req.flash('error').toString()
-			});
-		});
-
-	});
-	app.post('/edit/partner/:id', checkLogin);
-	app.post('/edit/partner/:id', function (req, res) {
-		var product = req.files.product, dbImgUrl;
-		if (req.body.pic) {
-			dbImgUrl = req.body.pic;
-		} else {
-			if (product.size == 0){
-				// 使用同步方式删除一个文件
-				fs.unlinkSync(product.path);
-				console.log('Successfully removed an empty file!');
-			} else {
-
-				var target_path = './public/images/dbimg/' + product.name;
-				// 使用同步方式重命名一个文件
-				fs.renameSync(product.path, target_path);
-
-				dbImgUrl = '/images/dbimg/' + product.name;
-			}
-		}
-		PostPartner.update(
-			req.params.id,
-			dbImgUrl,function (err) {
-				if (err) {
-					console.log('err');
-					req.flash('error', err);
-					return res.redirect('/manager_partner');
-				}
-				req.flash('success', '修改成功!');
-				return res.redirect('/manager_partner');
-			});
-	});
-	//删除合作伙伴
-	app.get('/delete/partner/:id', checkLogin);
-	app.get('/delete/partner/:id', function(req, res) {
-		PostPartner.remove(req.params.id, function (err) {
-			if (err) {
-				req.flash('error', err);
-				return res.redirect('back');
-			}
-			req.flash('success', '删除成功!');
-			res.redirect('manager_partner');
-		});
-	});
-	//行业链接
-	app.get('/links', function (req, res) {
-		var page = req.query.p ? parseInt(req.query.p) : 1;
-		PostLink.getTen(page, function (err, links, total) {
-			res.render('links', {
-				title: '行业链接-青海聚之源新材料有限公司',
-				links: links,
-				page: page,
-				isFirstPage: (page - 1) == 0,
-				isLastPage: ((page - 1) * 10 + links.length) == total,
-				user: req.session.user,
-				success: req.flash('success').toString(),
-				error: req.flash('error').toString()
-			});
-		})
-	});
-	//行业链接管理后台
-	app.get('/manager_link', checkLogin);
-	app.get('/manager_link', function (req, res) {
-		//判断是否是第一页，并把请求的页数转换成 number 类型
-		var page = req.query.p ? parseInt(req.query.p) : 1;
-		//查询并返回第 page 页的 10 个链接
-		PostLink.getTen(page, function (err, links, total) {
-			if (err) {
-				links = [];
-			}
-			res.render('manager_link', {
-				title: '管理行业链接-青海聚之源新材料有限公司',
-				links: links,
-				page: page,
-				isFirstPage: (page - 1) == 0,
-				isLastPage: ((page - 1) * 10 + links.length) == total,
-				user: req.session.user,
-				success: req.flash('success').toString(),
-				error: req.flash('error').toString()
-			});
-		});
-	});
-	//上传行业链接
-	app.get('/post_link', checkLogin);
-	app.get('/post_link', function (req, res) {
-		res.render('post_link', {
-			title: '上传行业链接-青海聚之源新材料有限公司',
-			editType: 'new',
-			user: req.session.user,
-			success: req.flash('success').toString(),
-			error: req.flash('error').toString()
-		});
-	});
-	app.post('/post_link', checkLogin);
-	app.post('/post_link', function (req, res) {
-		var postLink = new PostLink(req.body.title, req.body.url);
-		postLink.save(function (err) {
-			if (err) {
-				req.flash('error', '发布失败');
-				return res.redirect('/post_link');
-			}
-			req.flash('success', '发布成功!');
-			res.redirect('/manager_link');
-		});
-	});
-	//编辑行业链接
-	app.get('/edit/link/:id', checkLogin);
-	app.get('/edit/link/:id', function (req, res) {
-		PostLink.edit(req.params.id, function (err, link) {
-			if (err) {
-				req.flash('error', err);
-				console.log(err);
-				return res.redirect('/manager_link');
-			}
-			console.log(link);
-			res.render('post_link', {
-				link: link,
-				editType: 'edit',
-				title: '编辑行业链接-青海聚之源新材料有限公司' ,
-				user: req.session.user,
-				success: req.flash('success').toString(),
-				error: req.flash('error').toString()
-			});
-		});
-
-	});
-	app.post('/edit/link/:id', checkLogin);
-	app.post('/edit/link/:id', function (req, res) {
-		PostLink.update(
-			req.params.id,
-			req.body.title,
-			req.body.url,
-			function (err) {
-				if (err) {
-					console.log('err');
-					req.flash('error', err);
-					return res.redirect('/manager_link');
-				}
-				req.flash('success', '修改成功!');
-				return res.redirect('/manager_link');
-			});
-	});
-	app.get('/delete/link/:id', checkLogin);
-	app.get('/delete/link/:id', function(req, res) {
-		PostLink.remove(req.params.id, function (err) {
-			if (err) {
-				req.flash('error', err);
-				return res.redirect('back');
-			}
-			req.flash('success', '删除成功!');
-			res.redirect('/manager_link');
 		});
 	});
 	//加入 我们
@@ -687,18 +316,20 @@ module.exports = function (app) {
 		});
 	});
 	//获取单个职位信息
-	app.get('/job', function (req, res) {
-		PostJob.getOne(req.query.jobId, function (err, job){
-			if (err) {
-				return res.send({
-					state: false
-				});
-			} else {
-				return res.send({
-					state: true,
-					job: job
-				});
+	app.get('/job/:id', function (req, res) {
+		PostJob.getOne(req.params.id, function (err, job){
+			if (err || !job) {
+				req.flash('error', err);
+				console.log(err);
+				return res.redirect('/recruit');
 			}
+			res.render('job', {
+				title: '加入我们-青海聚之源新材料有限公司',
+				job: job,
+				user: req.session.user,
+				success: req.flash('success').toString(),
+				error: req.flash('error').toString()
+			});
 
 		})
 	});
@@ -739,6 +370,7 @@ module.exports = function (app) {
 	app.post('/post_job', function (req, res) {
 		var postJob = new PostJob(
 			req.body.title,
+			req.body.number,
 			req.body.content
 		);
 		postJob.save(function (err) {
@@ -775,6 +407,7 @@ module.exports = function (app) {
 		PostJob.update(
 			req.params.id,
 			req.body.title,
+			req.body.number,
 			req.body.content, function (err) {
 			if (err) {
 				console.log('err');
@@ -809,7 +442,7 @@ module.exports = function (app) {
 	// //登录
 	var user = {
 		name: 'admin',
-		password: 'qhhx_admin339'
+		password: 'qhjzy_admin339'
 	};
 	app.get('/login', checkNotLogin);
 	app.get('/login', function (req, res) {
@@ -823,26 +456,6 @@ module.exports = function (app) {
 	app.post('/login', function (req, res) {
 		//生成密码的 md5 值
 
-		//var md5 = crypto.createHash('md5'),
-		//	password = md5.update(req.body.password).digest('hex');
-			//检查用户是否存在
-		//User.get(req.body.userName, function (err, user) {
-		//	if (!user) {
-		//		req.flash('error', '用户不存在!');
-		//		return res.redirect('/login');
-		//	}
-		//	//检查密码是否一致
-		//	if (user.password != password) {
-		//		req.flash('error', '密码错误!');
-		//		console.log('密码不正确');
-		//		return res.redirect('/login');
-		//	}
-		//	//用户名密码都匹配后，将用户信息存入 session
-		//	console.log('密码正确');
-		//	req.session.user = user;
-		//	req.flash('success', '登陆成功!');
-		//	return res.redirect('/user_center');
-		//});
 		if (req.body.userName == user.name && req.body.password == user.password) {
 			req.session.user = user;
 			req.flash('success', '登陆成功!');

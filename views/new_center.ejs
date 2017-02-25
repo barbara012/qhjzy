@@ -29,42 +29,28 @@
 						<div class="main_tab_contents">
 							<div class="tab_content active">
 								<div class="bread_crumb"><div class="inner">动态要闻</div></div>
-								<!--<div class="news-list">-->
-									<!--<a class="list-item" href="#">-->
-										<!--<div  class="sp1">开工仪式</div>-->
-										<!--<div class="sp3">-->
-											<!--<span>2016.11.02</span>-->
-											<!--<div class="right">-->
-												<!--<span>查看详情</span>-->
-												<!--<span class="icon icon-right"></span>-->
-											<!--</div>-->
-										<!--</div>-->
-									<!--</a>-->
-									<!--<a class="list-item" href="#">-->
-										<!--<div  class="sp1">孟海州长阿英得副州长实地调研</div>-->
-										<!--<div class="sp3">-->
-											<!--<span>2016.11.02</span>-->
-											<!--<div class="right">-->
-												<!--<span>查看详情</span>-->
-												<!--<span class="icon icon-right"></span>-->
-											<!--</div>-->
-										<!--</div>-->
-									<!--</a>-->
-									<!--<a class="list-item" href="#">-->
-										<!--<div  class="sp1">领导视察中电工业环境科技园项目</div>-->
-										<!--<div class="sp3">-->
-											<!--<span>2016.10.02</span>-->
-											<!--<div class="right">-->
-												<!--<span>查看详情</span>-->
-												<!--<span class="icon icon-right"></span>-->
-											<!--</div>-->
-										<!--</div>-->
-									<!--</a>-->
-								<!--</div>-->
+							<% if (news.length == 0) { %>
 								<div class="empty">
 									<img src="/img/empty.png" alt="青海聚之源新材料有限公司">
 									<p>暂无新闻动态</p>
 								</div>
+							<% } else { %>
+								<div class="news-list">
+								<% news.forEach(function(one) {%>
+									<a class="list-item" href="/new/<%= one._id%>">
+										<div  class="sp1"><%= one.title %></div>
+										<div class="sp3">
+											<span><%= one.time.minute %></span>
+											<div class="right">
+												<span>查看详情</span>
+												<span class="icon icon-right"></span>
+											</div>
+										</div>
+									</a>
+								<%})%>
+								</div>
+								<% include paging %>
+							<% } %>
 							</div>
 						</div>
 					</div>

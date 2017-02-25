@@ -1,0 +1,7 @@
+/node_modules
+/error.log
+/access.log
+
+/public/images/dbimg
+
+.idea

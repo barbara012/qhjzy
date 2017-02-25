@@ -2,8 +2,9 @@ var ObjectID = require('mongodb').ObjectID,
 	mongodb = require('./db'),
 	markdown = require('markdown').markdown;
 
-function PostJob(title, content) {
+function PostJob(title, number, content) {
 	this.title = title;
+	this.number = number;
 	this.content = content;
 }
 
@@ -20,13 +21,13 @@ PostJob.prototype.save = function(callback) {
 		day : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(),
 		minute : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
 		date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) 
-	}
+	};
 	//要存入数据库的文档
 	var job = {
 		time: time,
 		title: this.title,
-		content: this.content,
-		pv: 0
+		number: this.number,
+		content: this.content
 	};
 	//打开数据库
 	mongodb.open(function (err, db) {
@@ -47,26 +48,6 @@ PostJob.prototype.save = function(callback) {
 				if (err) {
 				 	return callback(err);//失败！返回 err
 				}
-				// db.collection('users', function(err, collect) {
-				// 	if (err) {
-				// 		mongodb.close();
-				// 		return callback(err);
-				// 	}
-				// 	collect.update(
-				// 		{
-				// 			'name': PostJob.name
-				// 		},
-				// 		{
-				// 			$inc: {'jobs': 1}
-				// 		},
-				// 		function (err) {
-				// 			mongodb.close();
-				// 			if (err) {
-				// 				return callback(err);
-				// 			}
-				// 		}
-				// 	);
-				// })
 				callback(null);//返回 err 为 null
 			});
 		});
@@ -110,7 +91,7 @@ PostJob.getTen = function(page, callback) {
 		});
 	});
 };
-//获取一篇文章
+//获取一个职业
 PostJob.getOne = function(id, callback) {
 	//打开数据库
 	mongodb.open(function (err, db) {
@@ -124,34 +105,18 @@ PostJob.getOne = function(id, callback) {
 				mongodb.close();
 				return callback(err);
 			}
-			//根据用户名、发表日期及文章名进行查询
+			//根据职位ID
 			collection.findOne(
 				{
 					'_id': new ObjectID(id)
 				},
 				function (err, job) {
+					console.log(err);
+					mongodb.close();
 					if (err) {
-						mongodb.close();
 						return callback(err);
 					}
-					if (job) {
-					//每访问 1 次，pv 值增加 1
-						collection.update(
-							{
-								'_id': new ObjectID(id)
-							},
-							{
-								$inc: {"pv": 1}
-							},
-							function (err) {
-								mongodb.close();
-								if (err) {
-									return callback(err);
-								}
-							}
-						);
-						callback(null, job);//返回查询的一篇文章
-					}
+					callback(null, job);//返回查询的一篇文章
 				}
 			);
 		});
@@ -182,7 +147,7 @@ PostJob.edit = function(id, callback) {
 	});
 };
 //更新一篇文章及其相关信息
-PostJob.update = function(id, title, content, callback) {
+PostJob.update = function(id, title, number,  content, callback) {
 	//打开数据库
 	mongodb.open(function (err, db) {
 		if (err) {
@@ -200,6 +165,7 @@ PostJob.update = function(id, title, content, callback) {
 			}, {
 				$set: {
 					title: title,
+					number: number,
 					content: content
 				}
 			}, function (err) {

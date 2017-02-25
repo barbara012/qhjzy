@@ -5,7 +5,7 @@
 		<% include head %>
 	</head>
 	<body>
-		<div class="post-new backend">
+		<div class="post-new backend manager">
 			<div class="page-nav">
 				<div class="nav-content common-w clearfix">
 					<a href="/" class="logo-container float-l"></a>
@@ -32,6 +32,12 @@
 							</div>
 						</div>
 						<div class="form__item clearfix">
+							<label for="post__title" class="form__item__label">招聘人数</label>
+							<div class="text-wrapper">
+								<input type="text" required="required" name="number" class="form__item__text" id="number">
+							</div>
+						</div>
+						<div class="form__item clearfix">
 							<label for="post__content" class="form__item__label">招聘内容</label>
 							<div class="text-wrapper">
 								<textarea name="content" required="required" id="post__content"></textarea>
@@ -48,6 +54,12 @@
 							<label for="post__title" class="form__item__label">招聘职位</label>
 							<div class="text-wrapper">
 								<input type="text" required="required" value="<%= job.title %>" name="title" class="form__item__text" id="title">
+							</div>
+						</div>
+						<div class="form__item clearfix">
+							<label for="post__title" class="form__item__label">招聘人数</label>
+							<div class="text-wrapper">
+								<input type="text" required="required" value="<%= job.number %>" name="number" class="form__item__text" id="number">
 							</div>
 						</div>
 						<div class="form__item clearfix">

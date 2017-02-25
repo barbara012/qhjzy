@@ -21,19 +21,25 @@
 					</ul>
 				</div>
 			</div>
-			<div class="banner"></div>
-			<div class="bread_crumb">
-				<a href="/new_center">动态要闻</a>
-				<span class="divider">&gt;</span>
-				<span>要闻详情</span>
-			</div>
-			<div class="new-sp__content common-w">
-				<h1 class="title"><%= onenew.title %></h1>
-				<div class="new__date txt-c"><%- onenew.time.day %></div>
-				<div class="new__detail">
-					<div class="simditor">
-						<div class="simditor-body">
-							<%- onenew.post %>
+			<div class="common-banner"></div>
+			<div class="page-content">
+				<div class="common-w clearfix">
+					<div class="page_side">
+						<% include side_contact %>
+					</div>
+					<div class="page_main">
+						<div class="main_tab_contents">
+							<div class="tab_content active">
+								<div class="bread_crumb"><div class="inner">动态要闻 > <%= title %></div></div>
+								<h1><%= title %></h1>
+								<div class="new__date txt-c"><%- onenew.time.day %></div>
+								<div class="new_detail">
+									<div class="simditor">
+										<div class="simditor-body">
+											<%- onenew.post %>
+										</div>
+									</div>
+							</div>
 						</div>
 					</div>
 				</div>
