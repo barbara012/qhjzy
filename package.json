@@ -13,7 +13,7 @@
 	"dependencies": {
 		"express": "4.8.0",
 		"ejs": "0.8.8",
-		"mongodb": "2.0.42",
+		"mongodb": "2.2.19",
 		"connect-mongo": "0.8.2",
 		"connect-flash": "0.1.1",
 		"markdown": "*",
@@ -33,7 +33,7 @@
 		"passport-github": "*"
 	},
 	"devDependencies": {
-		"gulp": "^3.9.0",
+		"gulp": "^3.9.1",
 		"gulp-less": "^3.3.0",
 		"gulp-uglify": "^2.1.2"
 	}
