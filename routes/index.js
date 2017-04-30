@@ -26,6 +26,7 @@ module.exports = function (app) {
 				if (err1) {
 					news = [];
 				}
+				console.log(news)
 				res.render('index', {
 					user: req.session.user,
 					partners: partners,
