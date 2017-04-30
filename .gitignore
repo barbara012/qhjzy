@@ -1,7 +1,5 @@
-/node_modules
-/error.log
-/access.log
-
-/public/images/dbimg
-
-.idea
+.DS_Store
+node_modules/
+.idea/
+dist/
+npm-debug.log*
