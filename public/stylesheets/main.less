@@ -91,6 +91,7 @@ code {
 	font-size: 16px;
 	background-color: #fff;
 	position: relative;
+	overflow: hidden;
 	.logo-container {
 		font-size: 0;
 		width: 317px;
@@ -98,7 +99,7 @@ code {
 		background: url(/img/logo.png) no-repeat 0 -3px;
 	}
 	.menu__item_txt {
-		line-height: 58px;
+		line-height: 54px;
 		height: 56px;
 		display: block;
 		color: #000;
@@ -108,6 +109,40 @@ code {
 		&:hover {
 			color: #3dacdf;
 		}
+	}
+	.nav__menu_item {
+		&:last-child {
+			.menu__item_txt {
+				padding-right: 0;
+			}
+		}
+	}
+	.nav-right {
+		float: right;
+		padding-top: 10px;
+	}
+	.nav_other-operate {
+		text-align: right;
+		font-size: 12px;
+		a {
+			color: #484848;
+		}
+	}
+	.icon {
+		width: 22px;
+		height: 15px;
+		margin-right: 4px;
+		display: inline-block;
+		vertical-align: -3px;
+	}
+	.icon-ch {
+		background-image: url(/img/ch2.png)
+	}
+	.icon-en {
+		background-image: url(/img/en2.png)
+	}
+	.operate-item {
+		margin-left: 20px;
 	}
 }
 .home-banner-slider {
@@ -575,9 +610,27 @@ code {
 	.common-banner {
 		background-image: url("/img/company_desc/banner.png");
 	}
+	h2 {
+		text-align: center;
+	}
+	.idea-icon {
+		text-align: center;
+		img {
+			margin: 0 50px;
+		}
+	}
+	.idea-item {
+		margin-top: 10px;
+		text-align: center;
+		span {
+			margin: 0 15px;
+		}
+	}
 }
 .company-desc,
-.product-show {
+.product-show,
+.recruit {
+	font-size: 18px;
 	.tab_nav_item {
 		display: block;
 		color: #4a4a4a;
@@ -602,7 +655,7 @@ code {
 }
 .product-show {
 	.common-banner {
-		background-image: url("/img/company_desc/banner.png");
+		background-image: url("/img/product_show/banner.png");
 	}
 	h1 {
 		font-size: 24px;
@@ -617,6 +670,23 @@ code {
 	h2 {
 		font-size: 18px;
 		margin-top: 20px;
+	}
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		span {
+			width: 350px;
+			display: inline-block;
+		}
+	}
+	td,tr {
+		border: 1px solid #cdcdcd;
+	}
+	td {
+		padding: 20px 10px;
+		&:first-child {
+			width: 100px;
+		}
 	}
 }
 .recruit_job {
@@ -799,6 +869,13 @@ code {
 		}
 	}
 }
+.new-center,
+.base,
+.application-area {
+	.page_main {
+		width: 100%;
+	}
+}
 .base {
 	.common-banner {
 		background-image: url("/img/base/banner.png");
@@ -809,6 +886,17 @@ code {
 		img {
 			max-width: 100%;
 		}
+	}
+}
+.application-area {
+	.common-banner {
+		background-image: url("/img/application_area/banner.png");
+	}
+	h2 {
+		font-size: 16px;
+	}
+	p {
+		text-indent: 28px;
 	}
 }
 .empty {

@@ -431,10 +431,10 @@ module.exports = function (app) {
 			res.redirect('recruit');
 		});
 	});
-	//联系我们
-	app.get('/contact_us', function (req, res) {
-		res.render('contact_us', {
-			title: '联系我们|陕西帝奥电梯|中国一线电梯品牌领跑者',
+	//应用领域
+	app.get('/application_area', function (req, res) {
+		res.render('application_area', {
+			title: '应用领域|陕西帝奥电梯|中国一线电梯品牌领跑者',
 			user: req.session.user,
 			success: req.flash('success').toString(),
 			error: req.flash('error').toString()

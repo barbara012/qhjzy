@@ -16,7 +16,7 @@
 						<li class="nav__menu_item float-l"><a href="/base" class="menu__item_txt">生产基地</a></li>
 						<li class="nav__menu_item float-l"><a href="/new_center" class="menu__item_txt">动态要闻</a></li>
 						<li class="nav__menu_item float-l"><a href="/recruit" class="menu__item_txt active">加入我们</a></li>
-						<li class="nav__menu_item float-l"><a href="/about_us" class="menu__item_txt">关于我们</a></li>
+						<li class="nav__menu_item float-l"><a href="/application_area" class="menu__item_txt">应用领域</a></li>
 					</ul>
 				</div>
 			</div>
@@ -24,48 +24,26 @@
 			<div class="page-content">
 				<div class="common-w clearfix">
 					<div class="page_side">
-						<% include side_contact %>
+						<div class="side_tab_nav">
+                <a href="javascript:;" class="tab_nav_item active">联系我们</a>
+                <a href="javascript:;" class="tab_nav_item">招聘信息</a>
+            </div>
 					</div>
 					<div class="page_main">
 						<div class="main_tab_contents">
 							<div class="tab_content active">
-								<div class="bread_crumb"><div class="inner">招聘列表</div></div>
-
-								<!--<div class="jobs-list">-->
-									<!--<a class="list-item" href="#">-->
-										<!--<div  class="sp1">电梯调试员</div>-->
-										<!--<div class="sp2">2</div>-->
-										<!--<div class="sp3">-->
-											<!--<span>2016.11.02</span>-->
-											<!--<div class="right">-->
-												<!--<span>查看详情</span>-->
-												<!--<span class="icon icon-right"></span>-->
-											<!--</div>-->
-										<!--</div>-->
-									<!--</a>-->
-									<!--<a class="list-item" href="#">-->
-										<!--<div  class="sp1">商务专员</div>-->
-										<!--<div class="sp2">4</div>-->
-										<!--<div class="sp3">-->
-											<!--<span>2016.11.02</span>-->
-											<!--<div class="right">-->
-												<!--<span>查看详情</span>-->
-												<!--<span class="icon icon-right"></span>-->
-											<!--</div>-->
-										<!--</div>-->
-									<!--</a>-->
-									<!--<a class="list-item" href="#">-->
-										<!--<div  class="sp1">会计</div>-->
-										<!--<div class="sp2">5</div>-->
-										<!--<div class="sp3">-->
-											<!--<span>2016.10.02</span>-->
-											<!--<div class="right">-->
-												<!--<span>查看详情</span>-->
-												<!--<span class="icon icon-right"></span>-->
-											<!--</div>-->
-										<!--</div>-->
-									<!--</a>-->
-								<!--</div>-->
+								<div class="bread_crumb"><div class="inner">联系我们</div></div>
+								<img class="content_banner" src="/img/recruit/1.png" alt="青海聚之源新材料有限公司"/>
+								<div style="text-align: center; font-size:14px; line-height: 2">
+									<p><b>青海聚之源材料有限公司</b></p>
+									<p><b>电话：0977-8901001   0977-8220776</b></p>
+									<p><b>传真：0977-8221712</b></p>
+									<p><b>邮箱：qhjzyxcl@jzyxcl.com</b></p>
+									<p><b>地址：青海省海西州柴达木循环经济试验区德令哈工业园</b></p>
+								</div>
+							</div>
+							<div class="tab_content">
+								<div class="bread_crumb"><div class="inner">招聘信息</div></div>
 							<% if (jobs.length == 0) { %>
 								<div class="empty">
 									<img src="/img/empty.png" alt="青海聚之源新材料有限公司">
@@ -99,5 +77,14 @@
 			<% include footer %>
 			<script src="js/recruit.js"></script>
 		</div>
+		<script>
+	    $(document).ready(function() {
+	       $('.tab_nav_item').click(function() {
+	           var index = $(this).index();
+	           $(this).addClass('active').siblings('a').removeClass('active');
+	           $('.tab_content').removeClass('active').eq(index).addClass('active');
+	       });
+	    });
+	</script>
 	</body>
 </html>
